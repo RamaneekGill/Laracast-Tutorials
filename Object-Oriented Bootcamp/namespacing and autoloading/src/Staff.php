@@ -1,5 +1,7 @@
 <?php
 
+namespace Acme;
+use Acme\Users\Person;
 class Staff {
 	protected $members = [];
 
@@ -9,7 +11,7 @@ class Staff {
 
 	public function add(Person $person) { //typehint Person
 		$this->members[] = $person; 
-	}
+	} 
 
 	public function getMembers() {
 		return $this->members;

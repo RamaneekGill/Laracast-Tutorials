@@ -1,5 +1,9 @@
 <?php
 
+namespace Acme;
+
+use Acme\Users\Person;
+
 class Business {
 	//business hires a person, when they do they join the staff
 	//need staff before business
