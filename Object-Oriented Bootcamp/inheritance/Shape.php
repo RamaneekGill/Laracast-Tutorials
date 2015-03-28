@@ -1,6 +1,7 @@
 <?php
 
 //abstract class can never be instantiated alone
+//declare a class abstract if it is a parent and if it never needs to be instantiated
 abstract class Shape {
 	//use the parent class as a source of contract
 	//want to make sure every shape should have a getArea function
