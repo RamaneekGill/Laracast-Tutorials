@@ -28,7 +28,8 @@ class Person {
 	public function getAge() {
 		return $this->age * 365;
 	}
-
+	//next lets learn encapsulation, don't let people modify instance variables directly
+	//for security purposes 
 }
 
 $john = new Person('John Doe');
