@@ -2,7 +2,6 @@
 Various Tutorials from www.laracasts.com 
 
 ###Contains 
-	
 	* Object Oriented Bootcamp (PHP)
 		-source: https://laracasts.com/series/object-oriented-bootcamp-in-php
 	
@@ -16,7 +15,6 @@ Various Tutorials from www.laracasts.com
 		-source: https://laracasts.com/series/laravel-5-fundamentals
 
 ###Bonus:
-	
 	Personal Software Engineering Study Guide PDF
 		* MVC structure
 		* Security Practises for Web Apps
