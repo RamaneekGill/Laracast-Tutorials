@@ -33,4 +33,10 @@ class WelcomeController extends Controller {
 		return view('welcome');
 	}
 
+	public function contact() {
+		//return 'Contact me';
+		return view('pages/contact');
+		//a view is a dummy template
+	}
+
 }
