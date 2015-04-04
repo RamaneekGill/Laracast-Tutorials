@@ -1,15 +1,13 @@
-<!doctype html>
-<html lang='en'>
-<head>
-	<meta charset="utf-8">
-	<title>Document</title>
-</head>
+@extends('app')
+@section('content')
 
-<body>
-	<h1>About Me!</h1>
+<h1>About Me!</h1>
 
-	<p>{{$first}} {{$last}}</p>
-
-</body>
-
-</html>
+@if (count($people))
+	<h3>People I like:</h3>
+	<ul>
+		@foreach ($people as $person)
+			<li>{{$person}}</li>
+		@endforeach
+	</ul>
+@endif

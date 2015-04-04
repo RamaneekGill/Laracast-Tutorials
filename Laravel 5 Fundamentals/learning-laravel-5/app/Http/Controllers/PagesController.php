@@ -13,10 +13,12 @@ class PagesController extends Controller {
 		//two ways of passing $name into the view
 		//return view('pages.about')->with('name', $name);
 		//to pass more than one variable use an array!
-		return view('pages.about')->with([
-				'first' => 'Ramaneek',
-				'last' => 'Gill'
-			]);
+
+		$people = [
+			'Crosby', 'Ovechkin', 'Sedins'
+		];
+
+		return view('pages.about', compact('people'));
 
 		//third way:
 		//pass data as an arr in the 
@@ -29,6 +31,10 @@ class PagesController extends Controller {
 		$arr = compact('var1', 'var2');
 		return view('pages.about', $arr);
 		*/
+	}
+
+	public function contact() {
+		return view('pages.contact');
 	}
 
 }
