@@ -9,7 +9,12 @@ use Request;
 class ArticlesController extends Controller {
 
 	public function index() {
-		$articles = Article::latest()->get();
+		//get the articles that are published by current time
+		//in descending order
+		//$articles = Article::latest()->
+			//where('published_at', '<=', Carbon::now())->get();
+		
+		$articles = Article::latest()->published()->get();
 		return view('articles.index', compact('articles'));
 	}
 
@@ -25,10 +30,10 @@ class ArticlesController extends Controller {
 	}
 
 	public function store() {
-		$input = Request::all(); //fetch all input, from get and post
+		//$input = Request::all(); //fetch all input, from get and post
 		//$input = Request::get('title');
-		$input['published_at'] = Carbon::now();
-		Article::create($input); //created and saved to db
+		
+		Article::create(Request::all()); //created and saved to db
 		return redirect('articles');
 	}
 }
