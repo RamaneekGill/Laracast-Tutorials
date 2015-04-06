@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Article;
 use Carbon\Carbon;
+use Illuminate\Http\Response;
 use Request;
 
 class ArticlesController extends Controller {
@@ -29,11 +30,12 @@ class ArticlesController extends Controller {
 		return view('articles.create');
 	}
 
-	public function store() {
+	//by type hinting the validation will run before this function
+	public function store(Requests\CreateArticleRequest $request) {
 		//$input = Request::all(); //fetch all input, from get and post
 		//$input = Request::get('title');
 		
-		Article::create(Request::all()); //created and saved to db
+		Article::create($request->all()); //created and saved to db
 		return redirect('articles');
 	}
 }
