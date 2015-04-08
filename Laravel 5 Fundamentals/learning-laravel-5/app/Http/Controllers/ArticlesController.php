@@ -5,17 +5,18 @@ use App\Http\Controllers\Controller;
 use App\Article;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
-use Request;
+use Illuminate\Http\Request;
 
 class ArticlesController extends Controller {
 
 	public function index() {
 		//get the articles that are published by current time
 		//in descending order
-		//$articles = Article::latest()->
-			//where('published_at', '<=', Carbon::now())->get();
+		$articles = Article::latest()->
+			where('published_at', '<=', Carbon::now())->get();
 		
-		$articles = Article::latest()->published()->get();
+		//newest articles first
+		//$articles = Article::latest()->published()->get();
 		return view('articles.index', compact('articles'));
 	}
 
@@ -31,11 +32,23 @@ class ArticlesController extends Controller {
 	}
 
 	//by type hinting the validation will run before this function
-	public function store(Requests\CreateArticleRequest $request) {
+	public function store(Requests\ArticleRequest $request) {
 		//$input = Request::all(); //fetch all input, from get and post
 		//$input = Request::get('title');
 		
 		Article::create($request->all()); //created and saved to db
+		return redirect('articles');
+	}
+
+	public function edit($id) {
+		$article = Article::findOrFail($id);
+		return view('articles.edit', compact('article'));
+	}
+
+	public function update($id, Requests\ArticleRequest $request) {
+		//type hinting ArticleRequest lets us do validation
+		$article = Article::findOrFail($id);
+		$article->update($request->all());
 		return redirect('articles');
 	}
 }

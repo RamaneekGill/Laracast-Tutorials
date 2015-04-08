@@ -7,7 +7,12 @@ class Article extends Model {
 
 	//things a user can change
 	//Allows these to be mass assigned
-	protected $fillable = ['title','body','published_at'];
+	protected $fillable = ['title',
+							'body',
+							'published_at',
+							'user_id' //temporary
+							];
+							
 	//this makes dates a Carbon instance
 	protected $dates = ['published_at'];
 
@@ -23,5 +28,10 @@ class Article extends Model {
 	//set+ <NameofAttribute> + Attribute naming convention
 	public function setPublishedAtAttribute($date) {
 		$this->attributes['published_at'] = Carbon::createFromFormat('Y-m-d', $date);
+	}
+
+	//An article is owned by a user
+	public function user() {
+		return $this->belongsTo('App\User');
 	}
 }
