@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 class ArticlesController extends Controller {
 
 	public function index() {
+		//get authenticated user
+		\Auth::user();
+
 		//get the articles that are published by current time
 		//in descending order
 		$articles = Article::latest()->
@@ -35,8 +38,11 @@ class ArticlesController extends Controller {
 	public function store(Requests\ArticleRequest $request) {
 		//$input = Request::all(); //fetch all input, from get and post
 		//$input = Request::get('title');
-		
-		Article::create($request->all()); //created and saved to db
+
+		$article = new Article($request->all());
+		\Auth::user()->articles()->save($article); 
+		//get this users articles eloquent model and save a new one
+		//remember we setup the eloquent relationships earlier 
 		return redirect('articles');
 	}
 

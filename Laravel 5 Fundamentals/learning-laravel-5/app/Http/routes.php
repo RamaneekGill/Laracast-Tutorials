@@ -16,6 +16,10 @@ Better to do:
 */
 Route::resource('articles', 'ArticlesController');
 
+Route::controllers([
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController'
+]);
 
 /*
 Route::get('foo', function() {
