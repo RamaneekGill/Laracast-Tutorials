@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class ArticlesController extends Controller {
 
+	public function __construct() {
+		//$this->middleware('auth', ['only' => 'create']);
+		//refers to the Authenticate.php $routeMiddleware
+		//only run it for the articles/create route
+		//can also do $this->middleware('auth', ['except' => 'create'])
+		$this->middleware('auth', ['except' => 'index']);
+	}
+
 	public function index() {
 		//get authenticated user
 		\Auth::user();
