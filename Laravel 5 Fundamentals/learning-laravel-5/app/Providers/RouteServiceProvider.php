@@ -24,7 +24,19 @@ class RouteServiceProvider extends ServiceProvider {
 	{
 		parent::boot($router);
 
-		//
+		/*
+		Example of custom route model binding:
+
+		$router->bind('articles', function($id) {
+			return App\Article::published()->findOrFails($id); 
+		});
+		*/
+		
+		//Bind the wildcard article id to the Articles controller
+		//Now the controller doesn't need to fetch the article anymore
+		$router->model('articles', 'App\Article');
+		//Route::model() is a facade
+		//facades are pointers to instances of a registered underlying class
 	}
 
 	/**

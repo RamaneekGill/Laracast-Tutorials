@@ -31,10 +31,12 @@ class ArticlesController extends Controller {
 		return view('articles.index', compact('articles'));
 	}
 
-	public function show($id) {
-		$article = Article::findOrFail($id);
+	public function show(Article $article) {
+		//$article = Article::findOrFail($id);
 		//dd stands for die dump
 		//dd($article);
+		
+		//don't need to fetch the article anymore because of route model binding
 		return view('articles.show', compact('article'));
 	}
 
@@ -54,15 +56,18 @@ class ArticlesController extends Controller {
 		return redirect('articles');
 	}
 
-	public function edit($id) {
-		$article = Article::findOrFail($id);
+	public function edit(Article $article) {
+		//$article = Article::findOrFail($id);
+		//binded the wildcard article to this controller model 
+		//so don't need to fetch article
 		return view('articles.edit', compact('article'));
 	}
 
-	public function update($id, Requests\ArticleRequest $request) {
+	public function update(Article $article, Requests\ArticleRequest $request) {
 		//type hinting ArticleRequest lets us do validation
-		$article = Article::findOrFail($id);
+		//$article = Article::findOrFail($id);
 		$article->update($request->all());
+
 		return redirect('articles');
 	}
 }
