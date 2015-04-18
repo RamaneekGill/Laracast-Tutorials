@@ -12,5 +12,23 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.less('app.less');
+
+	mix.phpUnit();
+/*
+    mix.sass('app.scss').coffee(); 
+    //replace with less if you want less instead of sass
+
+    mix.styles([
+    	'vendor/normalize.css',
+    	'app.css'
+    ], 'public/output/final.css', 'public/css');
+
+
+    mix.scripts([
+    	'vendor/jquery.js',
+    	'min.js',
+    	'coupon.js'
+    ], 'public/output/scripts.js', 'publiic.js');
+*/
+
 });
