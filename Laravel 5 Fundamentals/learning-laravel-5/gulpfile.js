@@ -14,6 +14,10 @@ var elixir = require('laravel-elixir');
 elixir(function(mix) {
 
 	mix.phpUnit();
+
+	//mix.version('public/css/all.css');
+	//makes it so that the cached version doesn't override this
+	
 /*
     mix.sass('app.scss').coffee(); 
     //replace with less if you want less instead of sass

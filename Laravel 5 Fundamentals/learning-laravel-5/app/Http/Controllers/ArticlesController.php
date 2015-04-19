@@ -49,10 +49,26 @@ class ArticlesController extends Controller {
 		//$input = Request::all(); //fetch all input, from get and post
 		//$input = Request::get('title');
 
-		$article = new Article($request->all());
-		\Auth::user()->articles()->save($article); 
+		//$article = new Article($request->all());
+		
+		\Auth::user()->articles()->create($request->all()); 
 		//get this users articles eloquent model and save a new one
 		//remember we setup the eloquent relationships earlier 
+		
+		/*
+		session()->flash('flash_message', 'Your article has been created!');
+		session()->flash('flash_message_important', true);
+		return redirect('articles');
+
+		is the same as below!
+
+		return redirect('articles')->with([
+			'flash_message' => 'Your article has been created',
+			'flash_message_important' => true
+		]);
+		*/
+
+		flash()->success('Your article has been created!');
 		return redirect('articles');
 	}
 
