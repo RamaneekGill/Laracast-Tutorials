@@ -41,7 +41,8 @@ class ArticlesController extends Controller {
 	}
 
 	public function create() {
-		return view('articles.create');
+		$tags = \App\Tag::lists('name', 'id');
+		return view('articles.create', compact('tags'));
 	}
 
 	//by type hinting the validation will run before this function
@@ -50,8 +51,8 @@ class ArticlesController extends Controller {
 		//$input = Request::get('title');
 
 		//$article = new Article($request->all());
-		
-		\Auth::user()->articles()->create($request->all()); 
+
+		$article = \Auth::user()->articles()->create($request->all()); 
 		//get this users articles eloquent model and save a new one
 		//remember we setup the eloquent relationships earlier 
 		
@@ -67,6 +68,9 @@ class ArticlesController extends Controller {
 			'flash_message_important' => true
 		]);
 		*/
+		
+		//now update the pivot table to associate the tags with the article
+		$article->tags()->attach($request->input('tag_list'));
 
 		flash()->success('Your article has been created!');
 		return redirect('articles');
@@ -76,7 +80,9 @@ class ArticlesController extends Controller {
 		//$article = Article::findOrFail($id);
 		//binded the wildcard article to this controller model 
 		//so don't need to fetch article
-		return view('articles.edit', compact('article'));
+		
+		$tags = \App\Tag::lists('name', 'id');
+		return view('articles.edit', compact('article', 'tags'));
 	}
 
 	public function update(Article $article, Requests\ArticleRequest $request) {
