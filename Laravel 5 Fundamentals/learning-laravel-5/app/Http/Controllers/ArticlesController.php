@@ -70,6 +70,7 @@ class ArticlesController extends Controller {
 		*/
 		
 		//now update the pivot table to associate the tags with the article
+		$article->tags()->sync($request->input('tag_list'));
 		$article->tags()->attach($request->input('tag_list'));
 
 		flash()->success('Your article has been created!');
@@ -89,7 +90,7 @@ class ArticlesController extends Controller {
 		//type hinting ArticleRequest lets us do validation
 		//$article = Article::findOrFail($id);
 		$article->update($request->all());
-
+		$article->tags()->sync($request->input('tag_list'));
 		return redirect('articles');
 	}
 }
