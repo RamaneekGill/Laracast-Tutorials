@@ -19,17 +19,17 @@ abstract class HomeChecker {
 class Locks extends HomeChecker{ //makes sure door is locked
 	public function check(HomeStatus $home) {
 		if (! $home->locked) {
-			throw new Expection('Doors not locked!');
+			throw new Exception('Doors not locked!');
 		}
 
 		$this->next($home);
-	} 
+	}
 }
 
 class Lights extends HomeChecker{ //makes sure lights are off
 	public function check(HomeStatus $home) {
 		if (! $home->lightsOff) {
-			throw new Expection('Lights are not off!');
+			throw new Exception('Lights are not off!');
 		}
 
 		$this->next($home);
@@ -37,11 +37,11 @@ class Lights extends HomeChecker{ //makes sure lights are off
 }
 
 class Alarm extends HomeChecker{ //makes sure alarm is off
-	public function check(HomeStatus $home) { 
+	public function check(HomeStatus $home) {
 		if (! $home->alarmOn) {
-			throw new Expection('alarm is not on!');
+			throw new Exception('alarm is not on!');
 		}
- 
+
 		$this->next($home);
 	}
 }
@@ -61,6 +61,4 @@ $alarm = new Alarm;
 $locks->succeedWith($lights);
 $lights->succeedWith($alarm);
 //execute chain
-$locks->check(new HomeStatus)
-
-?>
+$locks->check(new HomeStatus);
